@@ -109,6 +109,34 @@ public:
             newnode->next = NULL;
         }
     }
+    void rmv(int value)
+    {
+        if(isempty())
+        {
+            cout<<"List is empty, no items to remove!\n";
+            return;
+        }
+        Node *curr = head;
+        Node *prev = NULL;
+        if(head ->data == value)
+        {
+            head = head->next;
+            delete curr;
+            return;
+        }
+        while(curr != NULL && curr->data != value)
+        {
+            prev = curr;
+            curr = curr->next;
+        }
+        if (curr == NULL)
+        {
+            cout <<"Value not found!\n";
+            return;
+        }
+        prev->next = curr->next;
+        delete curr;
+    }
 };
 int main()
 {
@@ -166,5 +194,9 @@ int main()
     cout << "Enter the value you need to add at last of the list : ";
     cin >> val;
     list.append(val);
+    list.display();
+    cout << "Enter the value you need remove from the list : ";
+    cin >> val;
+    list.rmv(val);
     list.display();
 }
